@@ -16,6 +16,7 @@
 static NSString *_activeResourceSite = nil;
 static NSString *_activeResourceUser = nil;
 static NSString *_activeResourcePassword = nil;
+static NSDictionary *_activeGETParameters = nil;
 static SEL _activeResourceParseDataMethod = nil;
 static SEL _activeResourceSerializeMethod = nil;
 static NSString *_activeResourceProtocolExtension = @".xml";
@@ -46,6 +47,14 @@ static ORSResponseFormat _format;
 
 + (void)setRemotePassword:(NSString *)password {
 	_activeResourcePassword = password;
+}
+
++ (NSDictionary *)getGETParameters {
+	return _activeGETParameters;
+}
+
++ (void)setGETParameters:(NSDictionary *)parameters {
+	_activeGETParameters = parameters;
 }
 
 + (void)setRemoteResponseType:(ORSResponseFormat) format {
@@ -152,7 +161,29 @@ static ORSResponseFormat _format;
 }
 
 - (NSString *)getRemoteCollectionPath {
-	return [[self class] getRemoteCollectionPath];
+	NSString *path = [[self class] getRemoteCollectionPath];
+	
+	if([[self class] getGETParameters]) {
+		path = [path stringByAppendingString:[self getURLParmaters]];
+	}
+
+	return path;
+}
+
+- (NSString *) getURLParmaters
+{
+	NSDictionary *params = [[self class] getGETParameters];
+	
+	if([params count] < 1){
+		return @"";
+	}
+	
+	NSString *urlParams = @"?";
+	for(NSString *key in params){
+		urlParams = [urlParams stringByAppendingString:[NSString stringWithFormat:@"%@=%@&", key, [params objectForKey:key]]];
+	}
+	
+	return urlParams;
 }
 
 // Converts the object to the data format expected by the server
