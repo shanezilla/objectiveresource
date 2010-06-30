@@ -24,7 +24,7 @@
 + (void)setProtocolExtension:(NSString *)protocolExtension;
 + (void)setResponseType:(ORSResponseFormat) format;
 + (ORSResponseFormat)getResponseType;
-+ (NSString *)getLocalClassesPrefix;
-+ (void)setLocalClassesPrefix:(NSString *)prefix;
+//+ (NSString *)getLocalClassesPrefix;
+//+ (void)setLocalClassesPrefix:(NSString *)prefix;
 
 @end
