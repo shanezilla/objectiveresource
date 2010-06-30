@@ -24,6 +24,8 @@ typedef enum {
 + (void)setRemoteUser:(NSString *)user;
 + (NSString *)getRemotePassword;
 + (void)setRemotePassword:(NSString *)password;
++ (NSDictionary *)getGETParameters;
++ (void)setGETParameters:(NSDictionary *)parameters;
 + (SEL)getRemoteParseDataMethod;
 + (void)setRemoteParseDataMethod:(SEL)parseMethod;
 + (SEL) getRemoteSerializeMethod;
@@ -33,9 +35,6 @@ typedef enum {
 + (void)setRemoteResponseType:(ORSResponseFormat) format;
 + (ORSResponseFormat)getRemoteResponseType;
 
-// Prefix additions
-+ (NSString *)getLocalClassesPrefix;
-+ (void)setLocalClassesPrefix:(NSString *)prefix;
 
 // Finders
 + (NSArray *)findAllRemote;
@@ -73,12 +72,11 @@ typedef enum {
 
 // Instance helpers for getting at commonly used class-level values
 - (NSString *)getRemoteCollectionPath;
+- (NSString *) getURLParmaters;
 - (NSString *)convertToRemoteExpectedType;
 
 //Equality test for remote enabled objects based on class name and remote id
 - (BOOL)isEqualToRemote:(id)anObject;
 - (NSUInteger)hashForRemote;
-
-- (NSArray *)excludedPropertyNames;
 
 @end

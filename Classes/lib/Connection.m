@@ -8,7 +8,7 @@
 
 #import "Connection.h"
 #import "Response.h"
-#import "NSData+Additions.h"
+#import "OSNSData+Additions.h"
 #import "NSMutableURLRequest+ResponseType.h"
 #import "ConnectionDelegate.h"
 
